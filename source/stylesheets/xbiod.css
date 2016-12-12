@@ -1,0 +1,491 @@
+/*////////////////////////////////////////////////////////////////////////
+Copyright (c) 2014-2016, The Ohio State University
+All rights reserved.
+
+Created by Joe Cora & Tyler Zeller
+Last revised on 6 January 2016 (TZ)
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of The Ohio State University nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE OHIO STATE UNIVERSITY BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+////////////////////////////////////////////////////////////////////////*/
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+body  div.xbiod {
+	width: 100%;
+}
+
+#search {
+	max-width: 650px;
+	overflow:hidden;
+	padding: 0;
+	position: relative;
+}
+
+.search-form {
+	margin-top: 1em;
+}
+
+.search-button {
+	float:right;
+	height: 40px;
+	background: none repeat scroll 0 0 #FF9900;
+	padding: 0;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	border-bottom-left-radius: 0;
+	border-left: 0 none;
+	border-top-left-radius: 0;
+}
+
+#search-button {
+	border-color: #d3d3d3;
+}
+
+.search-button-content {
+	color: #BBB;
+	float:right;
+	margin: 0 15px;
+	font-size: 15px;
+	line-height: 40px;
+	top:0;
+	z-index: 999;
+}
+
+#search_id {
+	height: 40px;
+	overflow: hidden;
+	position: relative;
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 2px #eee inset;
+}
+
+.xbiodSearch {
+	display: inline-block;
+	background-color: #ffffff;
+	border: 0 none;
+	height: 100%;
+	left: 0;
+	margin: 0;
+	position: absolute;
+	width: 100%;
+	color: #404041;
+	padding: 2px 6px;
+}
+
+.ui-autocomplete {
+	padding: 0;
+	max-height: 300px;
+	width: 400px;
+	background: none;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 2px;
+	background-color: #FFFFFF;
+	box-shadow: 0px 2px 7px #292929;
+	-moz-box-shadow: 0px 2px 7px #292929;
+	-webkit-box-shadow: 0px 2px 7px #292929;
+	position: absolute;
+	font-family: 'proximanova', Helvetica, Arial, sans-serif;
+	overflow-y: auto;
+	overflow-x: hidden;
+	z-index: 10001;
+	text-decoration: none;
+	list-style-type: none;
+}
+
+.ui-state-focus {
+	display: block;
+	background-color: #DDD;
+}
+
+.ui-autocomplete a {
+	color:black;
+	text-decoration: none;
+}
+
+/* Widget Frame */
+.xbiodWidgetFrame {
+	white-space: initial;
+	left: 0px;
+	position: relative;
+	height: auto;
+	margin: 2.5em;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 2px;
+	background-color: #FFF;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.xbiodWidgetIcon {
+  width: 40px;
+  height: 16px;
+  padding-right: 10px;
+}
+
+/* Widget Sections */
+
+/* Widget Header */
+.xbiodWidgetHeader {
+	color: #2BAAE1; /*70CFF5*/
+	background: #FFF;/*#404041*/
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	padding: .25em;
+	height: 1.75em;
+}
+
+.xbiodWidgetHeaderBar {
+	-webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
+	padding-top: 0px;
+	padding-left: 0px;
+	width: 100%;
+	height:100%;
+}
+
+.xbiodWidgetHeaderTitle{
+	color: black;
+	font-weight: bold;
+}
+
+.xbiodWidgetMenuButton {
+	cursor: pointer;
+	text-align: center;
+	height: 1.25em;
+	width: 1.25em;
+	float:right;
+}
+
+.xbiodWidgetMenu {
+	display: none;
+	background: none repeat scroll 0 0 #fff;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 2px;
+	position: absolute;
+	right: 0em;
+	top: 3em;
+	z-index: 999;
+	min-width: 80px;
+	-webkit-user-select: none; /* webkit (safari, chrome) browsers */
+	-moz-user-select: none; /* mozilla browsers */
+	-khtml-user-select: none; /* webkit (konqueror) browsers */
+	-ms-user-select: none; /* IE10+ */
+}
+
+
+.menu-icon {
+	color: black;
+	font-size: 15px;
+}
+
+.xbiodWidgetMenuContent ul {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+.xbiodWidgetMenuContent ul li:last-child {
+	border:none;
+}
+
+.xbiodWidgetMenuContent ul li:hover {
+	color: #2BAAE1;
+	background-color: #f5f5f5;
+}
+
+
+/* Inner menu button styles */
+.xbiodWidgetMenuContent ul li span {
+	display: inline-block;
+}
+
+.xbiodWidgetMenuContent ul li span span{
+	font-size: 10px;
+}
+
+.xbiodWidgetMenuContent ul li span, .xbiodWidgetMenuContent ul li label {
+	width: 100%;
+	font-weight:normal;
+}
+
+.xbiodMenuContentButton {
+	text-align: center;
+}
+
+/* override bootstrap button styles */
+.btn {
+	border-radius: 0px;
+	width: 100%;
+}
+
+.xbiodMenuContentButton:active{
+	background-color: #ff9900;
+}
+
+.xbiodWidgetMenuContent .xbiodMenuContentButtonHalf {
+	width: 50%;
+}
+
+/* Widget Content */
+.xbiodWidgetContent {
+	padding: 0px;
+	overflow:auto;
+	display: block;
+	width: 100%;
+}
+
+.no-overflow {
+	overflow:hidden;
+}
+
+/* Widget Content Data and Tables */
+
+.xbiodContentTable {
+	border-collapse: collapse;
+	width: 100%;
+	padding: 5px;
+	float: left;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+	z-index: 1;
+}
+
+.xbiodContentDataHeader {
+	padding-left: 0.5em;
+	text-decoration: none;
+	color: #70CFF5;
+	background-color: #404041;
+	font-weight: normal;
+	text-shadow: 0 0 0;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+.xbiodContentDataHeader:hover {
+	color: #2BAAE1;
+	background-color: #313131;
+	cursor:pointer;
+}
+
+.xbiodContentTable td {
+	padding: 0.5em;
+	text-align:left;
+}
+.xbiodContentTable td.bool {
+	text-align: center;
+}
+
+.xbiodContentTable a, .xbiodContentData a {
+	color: #2BAAE1;
+	text-decoration: none;
+}
+
+.xbiodContentTable a:hover, .xbiodContentData a:hover {
+	text-decoration: underline;
+}
+
+.xbiodContentData {
+	white-space: normal;
+}
+
+.xbiodContentData:hover {
+	color: #2BAAE1;
+	background-color: #F5F5F5;
+}
+
+.xbiodContentData:hover a {
+	color: #FF9900;
+}
+
+/* Xbiod page list */
+
+.xbiodWidgetPagination {
+	float: left;
+	width: 100%;
+	opacity: 0.2;
+	text-align: center;
+	display: none;
+}
+
+.xbiodWidgetPagination:hover {
+	opacity: 1;
+}
+
+.xbiodWidgetPagination .paginationList {
+	margin:0;
+	padding:0;
+	list-style-type: none;
+	display: inline;
+}
+
+.xbiodWidgetPagination .paginationList .paginationPages{
+	width: 60%;
+	text-align: center;
+	display: inline-block;
+}
+
+.xbiodWidgetPagination .paginationList .paginationPages > li{
+	width: 20%;
+	margin:auto;
+	display: inline-block;
+}
+
+.xbiodWidgetPagination .paginationList li:hover {
+	font-weight: bold;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.xbiodWidgetPagination .paginationList li:active {
+	font-weight: bold;
+	background-color: #FF9900;
+}
+
+.xbiodWidgetPagination .paginationList > li {
+	width: 20%;
+}
+
+.xbiodWidgetPagination .paginationList .leftPagination {
+	float: left;
+}
+
+.xbiodWidgetPagination .paginationList .rightPagination {
+	float: right;
+}
+
+.xbiodWidgetPagination .paginationButton {
+	display:block;
+}
+
+.current-page {
+	color: #FF9900;
+	font-weight: bolder;
+	text-decoration: underline;
+}
+
+/* Xbiod Person Specific Data */
+
+.xbiodPersonContentWrapper {
+	padding: 5px;
+}
+
+.xbiodPersonContentHeader {
+}
+
+.xbiodPersonSyn {
+	font-style: italic;
+}
+
+.xbiodPersonContentHeader img {
+	float: left;
+	padding-right: 5px;
+}
+
+.xbiodPersonName {
+	font-weight: bold;
+	font-size: 16pt;
+}
+
+.xbiodPersonContentBody {
+	clear:both;
+	max-width: 90%;
+}
+
+.xbiodPersonSectionHeader {
+	font-weight: bold;
+	border-bottom: 2px solid black;
+}
+
+/* Utility or Miscellaneous Styles */
+.agentDescribedTaxa {
+	width: 33.33%;
+}
+
+.PubRef {
+	/*font-size: 75%;*/
+}
+
+.ng-scope .ui-resizable-e {
+    right: 0px;
+}
+
+.ng-scope .ui-resizable-s {
+    bottom: 0px;
+}
+.Volume {
+	font-weight: bold;
+}
+.Journal {
+	font-style: italic;
+}
+
+/* Just for testing */
+.ColumnWrapper {
+	width: 100%;
+	display: inline-block;
+}
+
+.hover {
+	color: #2BAAE1;
+	background-color: #F5F5F5;
+}
+
+.hover a {
+	color: #FF9900;
+}
+
+.outline {
+	background-color: #D5D5D5;
+}
+
+.gallery-item {
+	outline: 2px solid black;
+}
+
+.gallery-item:hover {
+	outline: 2px solid #2BAAE1;
+}
+
+.marker {
+    display:inline-block;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    line-height: normal;
+    margin: 4px 10px 0 5px;
+		box-sizing: border-box;
+		padding: 0;
+}
+
+input[type="radio"]:focus, input[type="checkbox"]:focus {
+    outline: thin dotted;
+		outline-offset: -2px;
+}
+/* be happy */

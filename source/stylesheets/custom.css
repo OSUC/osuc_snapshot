@@ -1,0 +1,211 @@
+/* global */
+
+body {
+  height: 100%;
+  /*padding-top: 50px;*/
+  font-size: 16px;
+}
+
+a:active {
+  outline: 0;
+}
+
+a{
+  color: #2BAAE1;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+canvas {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
+  overflow: hidden;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #eaeaea;
+}
+
+p {
+  font-size: 1.1em;
+  line-height:  1.7em;
+}
+
+/* header */
+#logo {
+  font-family: serif;
+  font-size: 60pt;
+  margin-top: 40px;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#logo:hover {
+  cursor: default;
+  color: #FF9900;
+  text-decoration: none;
+}
+
+#logo a {
+    color: #70cff5;
+}
+
+#logo a:hover {
+  color: #FF9900;
+  text-decoration: none;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -4em;
+}
+
+
+/* footer */
+footer, .push {
+  clear: both;
+  height: 4em;
+}
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #999999;
+}
+
+footer  a {
+  color: #777777;
+}
+
+footer a:hover {
+  color: #555555; /* darker */
+}
+
+footer small {
+    float: left;
+}
+footer ul {
+    float: right;
+    list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}
+
+.banner {
+  padding-bottom: 60px;
+  padding-top: 60px;
+  text-align: left;
+  margin-bottom: 40px;
+  background-color: #404041;
+  background-image: linear-gradient(to bottom, #404041 0px, #323232 100%);
+  background-repeat: repeat-x;
+  color: #70cff5;
+  padding: 30px 0;
+  position: relative;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+#hier_location {
+  font-weight: bold;
+  margin: 1em 2.5em;
+}
+
+#hier_location a {
+  color: #FF9900;
+}
+
+#hier_location a:hover {
+  text-decoration: none;
+}
+
+.banner  h1 {
+    font-size: 60px;
+}
+
+.banner p {
+  color:white;
+  font-size: 24px;
+}
+
+.banner p a {
+  color:#FF9900;
+}
+
+
+.banner-title {
+  display: inline-block;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 21pt;
+  font-family:serif;
+  font-weight:bold;
+}
+
+.numbered-item {
+  font-size: 21pt;
+  font-weight: bold;
+  color:black;
+}
+
+.hol-section {
+  font-size: 12pt;
+  margin-bottom: 30px;
+}
+
+.pulse {
+	animation: pulse .75s ease infinite alternate;
+}
+
+@keyframes pulse {
+	0%, 100% {
+		color: #BBB;
+	}
+
+	50% {
+		color: #000;
+	}
+}

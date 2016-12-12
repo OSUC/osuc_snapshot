@@ -1,0 +1,134 @@
+<html>
+<head>
+
+  <link rel="shortcut icon" href="favicon.ico?" type='image/x-icon'/>
+
+  <title>C.A. Triplehorn Insect Collection (OSUC) Snapshot</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles/xbiod.css">
+  <link rel="stylesheet" href="styles/custom.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  <script type="text/javascript" src="http://jawj.github.io/OverlappingMarkerSpiderfier/bin/oms.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script src="js/xbiod/xbiod.js"></script>
+  <script src="js/xbiod/taxon.js"></script>
+</head>
+<body>
+  <!-- Header -->
+
+  <!-- Banner -->
+    <div class="banner">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+            <h1 id="logo">
+              <a href="/">(HOL)</a>
+            </h1>
+          </div>
+
+          <div class="col-md-9">
+            <div class="banner-title">
+              <h1>
+                OSUC Snapshot
+              </h1>
+              <p id="location">
+                Search the Collection Holdings at the C.A. Triplehorn Insect Collection
+              </p>
+              </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- End Banner -->
+
+    <!-- Main Content -->
+  <div class="wrapper">
+
+<div class="container-fluid">
+  <div class="row hol-section">
+    <div class="col-md-3">
+      <h1 class="section-title">
+        Welcome to OSUC
+      </h1>
+    </div>
+    <div class="col-md-8">
+      <p>
+        We're working to provide an interface to our database that displays the information in intuitive, attractive and meaningful ways. The format here was designed to better answer questions that are often posed: what species do you have, how many specimens and where are they from? If you have other burning questions, please do let us know by contacting us at one of the links at the bottom of the page. Note that some queries may take a while to load.
+      </p>
+    </div>
+  </div>
+
+  <div class="row hol-section">
+    <div class="col-md-3">
+      <h1 class="section-title">
+        Search
+      </h1>
+    </div>
+    <div class="col-md-8">
+
+      <form id="search" class="search-form">
+
+        <div id="search_id">
+          <span class="glyphicon glyphicon-search search-button-content"></span>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<div class="container xbiod">
+  <!--<canvas id="hierarchy_id62" data-processing-sources="processing/taxon-hierarchy.pde"></canvas>-->
+
+  <div class="row">
+    <div class="col-md-12" style="border-bottom: solid 1px #eaeaea;">
+      <div class="banner-title">
+        <p id="hier_location">
+          Hierarchy:
+        </p>
+        </div>
+    </div>
+  </div>
+
+  <div id="half_width" class="row">
+    <!-- style="width: 50%; float: left; min-height: 1px; -->
+    <div id="half_width_c1" class="col-md-6"></div>
+    <div id="half_width_c2" class="col-md-6"></div>
+
+  </div>
+  <div id="full_width" class="row">
+
+    <!-- style="width: 100%; float: left;" -->
+    <div id="full_width_c1" class="col-md-12" ></div>
+
+  </div>
+</div><!-- /content -->
+
+    <div class="push"></div>
+  </div>
+  <!-- End Main Content-->
+
+  <!-- Footer -->
+  <footer class="footer">
+<div class="container">
+  <small>© Copyright 2011-2016, <a href="http://www.osu.edu/">The Ohio State University</a></small>
+  <nav>
+    <ul>
+      <li><a href="http://triplehorn-s.asc.ohio-state.edu/about">About</a></li>
+      <li><a href="http://triplehorn-s.asc.ohio-state.edu/contact">Contact</a></li>
+      <li><a href="http://u.osu.edu/pinningblock/">News</a></li>
+    </ul>
+  </nav>
+</div>
+<img src="/img/xbiod.png">
+</footer>
+
+</body>
+
+</html>
