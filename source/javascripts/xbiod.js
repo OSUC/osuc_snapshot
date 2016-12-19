@@ -62,7 +62,7 @@ xbiod.base.general_format_default = '%name%';
 xbiod.base.widget_id_default = '%NAME%-xbiod';
 xbiod.base.widget_html =
 	"<div id='" + xbiod.base.widget_id_default + "' class='xbiodWidgetFrame'> "+
-		"<div class='xbiodWidgetHeader' data-toggle='tooltip' data-placement='bottom' title='Double click to toggle widget'>" +
+		"<div class='xbiodWidgetHeader'>" +
 			"<div class='xbiodWidgetHeaderBar'>" +
 				"%HEADER%" +
 					"<span class='xbiodWidgetHeaderTitle'>%TITLE%</span>" +
@@ -78,7 +78,7 @@ xbiod.base.widget_html =
 				"</div>" +
 			"</div>" +
 			"<div id='%NAME%-content' class='xbiodWidgetContent'></div>" +
-			"<div id='%NAME%-pagination' class='xbiodWidgetPagination' data-toggle='tooltip' data-placement='bottom' title='Use these controls to navigate between pages of data'>" +
+			"<div id='%NAME%-pagination' class='xbiodWidgetPagination'>" +
 				"<ul class='paginationList'>" +
 					"<li class='leftPagination'>" +
 						"<span class='paginationButton btn left'> " +
@@ -202,10 +202,9 @@ xbiod.base.menu_item.radio = function(option, value, checked, name){
 // xBio:D BASE WIDGET OPTIONS
 xbiod.base.widget_options = {
 	initial_height: '275px',
-	handles: 's',
-	resizable: 'N',
-	animate: 'Y',
-	start: 'open',
+	animate: true,
+	start_closed: false,
+	overflow: true,
 	header: ''
 };
 
@@ -265,35 +264,35 @@ xbiod.init = function(libs, api_key, callback) {
 				//http://osuc.biosci.ohio-state.edu/JSLib/xbiod_lib
 				//$.getScript('xbiod.visual.js');
 				var script = document.createElement('script');
-				script.src = 'js/xbiod/xbiod.visual.js';
+				script.src = 'javascripts/xbiod.visual.js';
 				document.head.appendChild(script);
 				break;
 			}
 			case 'taxon': {
 				//$.getScript('xbiod.taxon.js');
 				var script = document.createElement('script');
-				script.src = 'js/xbiod/xbiod.taxon.js';
+				script.src = 'javascripts/xbiod.taxon.js';
 				document.head.appendChild(script);
 				break;
 			}
 			case 'occurrence': {
 				//$.getScript('xbiod.occurrence.js');
 				var script = document.createElement('script');
-				script.src = 'js/xbiod/xbiod.occurrence.js';
+				script.src = 'javascripts/xbiod.occurrence.js';
 				document.head.appendChild(script);
 				break;
 			}
 			case 'agent': {
 				//$.getScript('xbiod.agent.js');
 				var script = document.createElement('script');
-				script.src = 'js/xbiod/xbiod.agent.js';
+				script.src = 'javascripts/xbiod.agent.js';
 				document.head.appendChild(script);
 				break;
 			}
 			case 'search': {
 				//$.getScript('xbiod.search.js');
 				var script = document.createElement('script');
-				script.src = 'js/xbiod/xbiod.search.js';
+				script.src = 'javascripts/xbiod.search.js';
 				document.head.appendChild(script);
 			}
 		}
@@ -1115,7 +1114,7 @@ function sortBy(property, reverse, primer) {
 }
 
 xbiod.base.addLoaderIcon = function(id) {
-	var icon = ' <img class="loader_icon" src="img/loader.gif"/>';
+	var icon = ' <img class="loader_icon" src="images/loader.gif"/>';
 	$('#' + id).find('.xbiodWidgetHeaderBar').append(icon);
 }
 
@@ -1151,26 +1150,23 @@ xbiod.base.createWidget = function(name, container_id, options) {
 	if (options.header == undefined){
 		options.header = xbiod.base.widget_options.header;
 	}
-	if (options.resizable == undefined){
-		options.resizable = xbiod.base.widget_options.resizable;
-	}
 	if(options.initial_height == undefined){
 		options.initial_height = xbiod.base.widget_options.initial_height;
-	}
-	if (options.handles == undefined){
-		options.handles = xbiod.base.widget_options.handles;
 	}
 	if (options.animate == undefined){
 		options.animate = xbiod.base.widget_options.animate;
 	}
-	if (options.start == undefined){
-		options.start = xbiod.base.widget_options.start;
+	if (options.start_closed == undefined){
+		options.start_closed = xbiod.base.widget_options.start_closed;
 	}
 	if (options.visual == undefined){
-		options.visual = 'N';
+		options.visual = xbiod.base.widget_options.visual;
 	}
-	if (options.no_overflow == undefined){
-		options.no_overflow = 'N';
+	if (options.map == undefined){
+		options.map = false;
+	}
+	if (options.overflow == undefined){
+		options.overflow = xbiod.base.widget_options.overflow;
 	}
 
 	var ids; // object containing widget id and content id
@@ -1186,7 +1182,7 @@ xbiod.base.createWidget = function(name, container_id, options) {
 	widget.data('pagination', false);
 	widget.data('num_pages', 0);
 
-	if (options.start == 'closed'){
+	if (options.start_closed){
 		widget.data('open', false);
 	} else {
 		widget.data('open', true);
@@ -1201,17 +1197,15 @@ xbiod.base.createWidget = function(name, container_id, options) {
 
 	xbiod.base.baseMenu(widgetId, contentId, options); // every widget gets base menu items
 
-	if (options.visual == 'N'){
+	if (!options.visual){
 		xbiod.base.textualMenu(widgetId, contentId, options); // text based widgets get text specific menu items
 	}
 
-	if (options.no_overflow == 'Y') {
+	if (!options.overflow) {
 		$('#' + contentId).addClass('no-overflow');
 	}
 
-	/*
-	 * controlWidget sets up all jQuery events. It must receive the IDs of the widget and the content
-	 */
+	// controlWidget sets up all jQuery events. It must receive the IDs of the widget and the content
 	xbiod.base.controlWidget(widgetId, contentId, options);
 	return ids;
 }
@@ -1224,67 +1218,27 @@ $.fn.hasScrollBar = function() {
 	return hasScrollBar;
 }
 
-$.Animation.prefilter(function(element, properties, options){
-	if (options.overrideOverflow){
-		$(element).css('overflow', options.overrideOverflow)
-	}
-});
+// $.Animation.prefilter(function(element, properties, options){
+// 	if (options.overrideOverflow){
+// 		$(element).css('overflow', options.overrideOverflow)
+// 	}
+// });
 
 xbiod.base.controlWidget = function (widgetId, contentId, options) {
 	var widget = $('#' + widgetId);
 	var content = $('#' + contentId);
 
 	// Control initial height
-	if (options.start == 'closed'){
+	if (options.start_closed){
 		content.css('max-height', '0px');
 	} else {
-		content.css('max-height', options.initial_height);
+			content.css('max-height', options.initial_height);
 	}
 
 	// Getting exact min height for the widget (window height - content height)
 	if(xbiod.base.widget_min_height == 0){
 		var min_height = xbiod.utils.pixelsToInt(widget.css('height')) - xbiod.utils.pixelsToInt(content.css('height'));
 		xbiod.base.widget_min_height = min_height;
-	}
-
-	// Checking if user enabled resizing */
-	if (options.resizable == 'Y') {
-		widget.resizable({
-			alsoResize: '#' + contentId, // also resize the content with the window
-			disabled: true, // disable by default until a user hovers over
-			minHeight: xbiod.base.widget_min_height, //min height of resize
-			handles: options.handles, // specify which handles can be resized. Defaults to 's' to limit user control over webpage structure
-			resize: function (event, ui) { // resize callback
-				if ($(this).height() < xbiod.base.widget_min_height + 20){
-					content.css('overflow', 'hidden'); // hide scroll bars
-				} else {
-					content.css('overflow', 'auto'); // reset scroll bars
-				}
-
-				// Checking if this is not a map widget, and the widget does not have a vertical scroll bar. This prevents a user from resizing the content if there is no more data to show.
-				if (options.map != 'Y' && !content.hasScrollBar().vertical){
-					$( this ).resizable('option', 'maxHeight', ui.size.height); // set max height to current height to disable resize
-				} else {
-					$( this ).resizable('option', 'maxHeight', $(this).parent().height()); // set max height to container
-				}
-
-				// Checking if content has been resized to closed position
-				//if ($('#' + contentId).position().top >= $('#' + widgetId + ' .xbiodWidgetFooter').position().top){
-				//	$('#' + contentId).css('height', '1px'); // prevents miscalculated JQuery overflow
-				//}
-			}
-		});
-
-		// Performance is increased by disabling the resizable widgets when the user isn't interacting with them
-		// Binding mouseenter event to enable widget resize
-		widget.mouseenter(function(){
-			$(this).resizable("option", "disabled", false);
-		});
-
-		// Binding mouseleave event to disable widget resize
-		widget.mouseleave(function(e){
-			$(this).resizable("option", "disabled", true).removeClass('ui-state-disabled'); //<-- prevent JQuery css
-		});
 	}
 
 	/* 	CONTROLLING THE MENU */
@@ -1333,7 +1287,7 @@ xbiod.base.openWidget = function(widget_id, content_id, options){
 	var content = $('#' + content_id);
 
 	//Checking if user enabled animations
-	if (options.animate == 'Y') {
+	if (options.animate) {
 		content.animate({
 			maxHeight: options.initial_height
 		}, 'fast');
@@ -1342,7 +1296,7 @@ xbiod.base.openWidget = function(widget_id, content_id, options){
 	}
 
 	// Controlling content
-	if (options.no_overflow == 'N'){
+	if (options.overflow){
 		content.css('overflow', 'auto');
 	}
 
@@ -1362,7 +1316,7 @@ xbiod.base.closeWidget = function (widget_id, content_id, options){
 	var widget = $('#' + widget_id);
 	var content = $('#' + content_id);
 	// Checking if user enabled animations
-	if (options.animate == 'Y') {
+	if (options.animate) {
 		content.animate({ // animate content
 			maxHeight: '0px'
 		}, 'fast');
@@ -1371,7 +1325,7 @@ xbiod.base.closeWidget = function (widget_id, content_id, options){
 	}
 
 	// controlling content
-	if (options.no_overflow == 'N'){
+	if (options.overflow){
 		content.css('overflow', 'auto');
 	}
 
@@ -1601,9 +1555,7 @@ xbiod.base.controlPagination = function(widget_id, value){
 	}
 }
 
-/*
- * Binds a callback for an event to a menu item
- */
+//Binds a callback for an event to a menu item
 xbiod.utils.registerMenuEventHandler = function(widget_id, menu_item, event, handler){
 	var item = $('#' + widget_id).find(menu_item);
 	item.bind(event, handler)
@@ -1657,10 +1609,7 @@ xbiod.utils.cyclePagination = function(widget_id, next_page){
 	xbiod.base.showPagination(widget_id);
 }
 
-
-/*
- * Adds 1 to many items to the  menu that belongs to the specified widget_id
- */
+//Adds 1 to many items to the  menu that belongs to the specified widget_id
 xbiod.utils.populateMenu = function(widget_id){
 	var menu_content = $('#' + widget_id).find('.xbiodWidgetMenuList');
 
@@ -1685,7 +1634,12 @@ xbiod.utils.pixelsToInt = function (str){
 	}
 }
 
- // Helper function. Adds commas for thousands separation
+xbiod.base.setContentHeight = function(content_id, height){
+	var content = $('#' + content_id);
+	content.css('height', height);
+}
+
+// Helper function. Adds commas for thousands separation
 String.prototype.addCommas = function() {
 	return this.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };

@@ -23,7 +23,7 @@ function loader() {
 
 		// Setting default widget options
 		xbiod.base.widget_options.initial_height = '450px';
-		xbiod.base.widget_options.header = '<img class="xbiodWidgetIcon" src="img/xbiod.png"/>';
+		xbiod.base.widget_options.header = '<img class="xbiodWidgetIcon" src="images/xbiod.png"/>';
 
 		// Load search
 		search.showSearch('search_id', {search_type: 'id', domains: [{type: 'taxon', handler_url: '/taxon'}, {type: 'occurrence', handler_url: '/occurrence'}, {type: 'agent', handler_url: '/agent'}]});
@@ -39,8 +39,5 @@ function loader() {
 
 		// Load person described taxa
 		agent.showDescribedTaxa('half_width_c2', agent_id, {});
-
-
-		$('.xbiodWidgetFooter').tooltip();
 	});
 }

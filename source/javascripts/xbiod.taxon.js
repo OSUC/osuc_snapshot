@@ -97,21 +97,19 @@ xbiod.taxon.prototype.showIncludedTaxa = function(element_id, tnuid, options) {
 		var widget_id = widget_ids.widget_id;
 		var content_id = widget_ids.content_id;
 
-		// array of menu items
-		var check_box_array = [];
-
 		// creating each menu item, one per option (takes menu item label, item name, and initial checked conditions as parameters. Returns value that addMenuItem function can handle)
 		var fossil_checkbox = xbiod.base.menu_item.checkbox("Show Fossils", "show_fossils", options.show_fossils == 'Y' ? 'checked="checked"' : '');
 		var syns_checkbox = xbiod.base.menu_item.checkbox("Show Synonyms", "show_syns", options.show_syns == 'Y' ? 'checked="checked"' : '');
 		var types_checkbox = xbiod.base.menu_item.checkbox("Types Only", "types_only", options.types_only == 'Y' ? 'checked="checked"' : '');
 
-		// add menu items to array
+		// array of menu items
+		var check_box_array = [];
 		check_box_array.push(fossil_checkbox, syns_checkbox, types_checkbox);
 
 		// add array of menu items to menu (via addMenuItem function. addMenuItem can also take each item individually)
 		xbiod.base.addMenuItem(widget_id, check_box_array);
 
-		// Construct a new load callback function. Called directly after its declaration and whenever a user reload a widget.
+		// Construct a new load callback function. Called directly after its declaration and whenever a user reloads a widget.
 		xbiod.taxon.prototype.loadIncludedTaxa = function(options) {
 			var widget = $('#' + widget_id);
 			var content = $('#' + content_id);
@@ -183,6 +181,7 @@ xbiod.taxon.prototype.showIncludedTaxa = function(element_id, tnuid, options) {
 							xbiod.base.hidePagination(widget_id);
 						}
 					}
+
 				} else {
 					xbiod.base.showAPIResponseError(jData.code);
 					xbiod.base.errorResponse(widget_id, content_id, options.widget_options);
@@ -190,7 +189,10 @@ xbiod.taxon.prototype.showIncludedTaxa = function(element_id, tnuid, options) {
 			});
 		}
 		// Registers all event listeners on the widget and calls the load function.
-		registerMenuAndLoad(widget_id, xbiod.taxon.prototype.loadIncludedTaxa, options);
+		registerMenu(widget_id, xbiod.taxon.prototype.loadIncludedTaxa, options);
+
+		// Loads the widget with the
+		xbiod.taxon.prototype.loadIncludedTaxa(options);
 
 	} else {
 		xbiod.base.showParameterError('showIncludedTaxa', 'taxon');
@@ -312,7 +314,8 @@ xbiod.taxon.prototype.showSynonyms = function(element_id, tnuid, options) {
 			});
 		}
 
-		registerMenuAndLoad(widget_id, xbiod.taxon.prototype.loadSynonyms, options);
+		registerMenu(widget_id, xbiod.taxon.prototype.loadSynonyms, options);
+		xbiod.taxon.prototype.loadSynonyms(options);
 
 	} else {
 		// An error occurred.
@@ -429,7 +432,9 @@ xbiod.taxon.prototype.showInstitutions = function(element_id, tnuid, options) {
 			});
 		}
 
-		registerMenuAndLoad(widget_id, xbiod.taxon.prototype.loadInstitutions, options);
+		registerMenu(widget_id, xbiod.taxon.prototype.loadInstitutions, options);
+		xbiod.taxon.prototype.loadInstitutions(options);
+
 	} else {
 		// An error occurred.
 		xbiod.base.showParameterError('showInstitutions', 'taxon');
@@ -506,7 +511,8 @@ xbiod.taxon.prototype.showHabitats = function(element_id, tnuid, options) {
 			});
 		}
 
-		registerMenuAndLoad(widget_id, xbiod.taxon.prototype.loadHabitats, options);
+		registerMenu(widget_id, xbiod.taxon.prototype.loadHabitats, options);
+		xbiod.taxon.prototype.loadHabitats(options);
 
 	} else {
 		xbiod.base.showParameterError('showHabitats', 'taxon');
@@ -614,7 +620,8 @@ xbiod.taxon.prototype.showLiterature = function(element_id, tnuid, options) {
 			});
 		}
 
-		registerMenuAndLoad(widget_id, xbiod.taxon.prototype.loadLiterature, options);
+		registerMenu(widget_id, xbiod.taxon.prototype.loadLiterature, options);
+		xbiod.taxon.prototype.loadLiterature(options);
 
 	} else {
 		xbiod.base.showParameterError('showTaxonLit', 'taxon');
@@ -752,7 +759,8 @@ xbiod.taxon.prototype.showAssociations = function(element_id, tnuid, options) {
 			});
 		}
 
-		registerMenuAndLoad(widget_id, xbiod.taxon.prototype.loadAssociations, options);
+		registerMenu(widget_id, xbiod.taxon.prototype.loadAssociations, options);
+		xbiod.taxon.prototype.loadAssociations(options);
 
 	} else {
 		xbiod.base.showParameterError('showAssociations', 'taxon');
@@ -879,7 +887,8 @@ xbiod.taxon.prototype.showTaxonMedia = function(element_id, tnuid, options) {
 			});
 		}
 
-		registerMenuAndLoad(widget_id, xbiod.taxon.prototype.loadMedia, options);
+		registerMenu(widget_id, xbiod.taxon.prototype.loadMedia, options);
+		xbiod.taxon.prototype.loadMedia(options);
 
 	} else {
 		xbiod.base.showParameterError('showTaxonMedia', 'taxon');
@@ -1039,7 +1048,8 @@ xbiod.taxon.prototype.showTypes = function(element_id, tnuid, options) {
 			});
 		}
 
-		registerMenuAndLoad(widget_id, xbiod.taxon.prototype.loadTypes, options);
+		registerMenu(widget_id, xbiod.taxon.prototype.loadTypes, options);
+		xbiod.taxon.prototype.loadTypes(options);
 
 	} else {
 		xbiod.base.showParameterError('showTaxonTypes', 'taxon');
@@ -1148,7 +1158,8 @@ xbiod.taxon.prototype.showDeterminers = function(element_id, tnuid, options) {
 			});
 		}
 
-		registerMenuAndLoad(widget_id, xbiod.taxon.prototype.loadDeterminers, options);
+		registerMenu(widget_id, xbiod.taxon.prototype.loadDeterminers, options);
+		xbiod.taxon.prototype.loadDeterminers(options);
 
 	} else {
 		xbiod.base.showParameterError('showDeterminers', 'taxon');
@@ -1258,7 +1269,8 @@ xbiod.taxon.prototype.showContributors = function(element_id, tnuid, options) {
 			});
 		}
 
-		registerMenuAndLoad(widget_id, xbiod.taxon.prototype.loadContributors, options);
+		registerMenu(widget_id, xbiod.taxon.prototype.loadContributors, options);
+		xbiod.taxon.prototype.loadContributors(options);
 
 	} else {
 		xbiod.base.showParameterError('showContributors', 'taxon');
@@ -1337,7 +1349,8 @@ xbiod.taxon.prototype.showSubordinateTaxa = function(element_id, tnuid, options)
 			});
 		}
 
-		registerMenuAndLoad(widget_id, xbiod.taxon.prototype.loadSubordinateTaxa, options);
+		registerMenu(widget_id, xbiod.taxon.prototype.loadSubordinateTaxa, options);
+		xbiod.taxon.prototype.loadSubordinateTaxa(options);
 
 	} else {
 		xbiod.base.showParameterError('showSubordinateTaxa', 'taxon');
@@ -1399,18 +1412,16 @@ var finishWidget = function(widget_id, content_id, table, tableElements){
 	xbiod.base.addTableEvents(widget_id);
 };
 
-var registerMenuAndLoad = function(widget_id, load, options){
+var registerMenu = function(widget_id, load, options){
 	xbiod.utils.registerMenuEventHandler(widget_id, '.refreshMenuButton', 'click', function(){
-			var menu_items = $('#' + widget_id).find('input');
-			menu_items.each(function(i, item){
-				if (item.type === 'checkbox' || item.type === 'radio'){
-					options[item.value] = item.checked ? "Y" : "N";
-				}
-			});
-			load(options);
+		var menu_items = $('#' + widget_id).find('input');
+		menu_items.each(function(i, item){
+			if (item.type === 'checkbox' || item.type === 'radio'){
+				options[item.value] = item.checked ? "Y" : "N";
+			}
 		});
-
-	load(options);
+		load(options);
+	});
 };
 
 var resetWidget = function(widget_id, content_id){

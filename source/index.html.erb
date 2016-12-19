@@ -1,10 +1,76 @@
 ---
 title: OSUC Snapshot
+desc: Search the Collection Holdings at the C.A. Triplehorn Insect Collection
 ---
 
-<div class="welcome">
-  <div class="logo">
-    <%= image_tag "middleman-logo.svg" %>
+<div class="wrapper">
+
+  <div class="container-fluid welcome">
+
+    <div class="row hol-section">
+
+      <div class="col-md-2">
+        <h1 class="section-title">
+          Welcome to OSUC
+        </h1>
+      </div>
+
+      <div class="col-md-8">
+        <p class="doc">
+          We're working to provide an interface to our database that displays the information in intuitive, attractive and meaningful ways. The format here was designed to better answer questions that are often posed: what species do you have, how many specimens and where are they from? If you have other burning questions, please do let us know by contacting us at one of the links at the bottom of the page. Note that some queries may take a while to load.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="row hol-section">
+
+      <div class="col-md-2">
+        <h1 class="section-title">
+          Search
+        </h1>
+      </div>
+
+      <div class="col-md-8">
+        <div>
+
+          <%= partial 'partials/search' %>
+
+        </div>
+      </div>
+
+    </div>
+
   </div>
-  <h1>Middleman is Running</h1>
-</div><!-- .welcome -->
+  <!-- .welcome -->
+
+  <div class="container xbiod">
+  <!--<canvas id="hierarchy_id62" data-processing-sources="processing/taxon-hierarchy.pde"></canvas>-->
+
+    <div class="row">
+      <div class="col-md-12" style="border-bottom: solid 1px #eaeaea; text-align: left;">
+        <div class="banner-title">
+          <p id="hier_location">
+            Hierarchy:
+          </p>
+          </div>
+      </div>
+    </div>
+
+    <div id="half_width" class="row">
+      <div id="half_width_c1" class="col-md-6"></div>
+      <div id="half_width_c2" class="col-md-6"></div>
+
+    </div>
+
+    <div id="full_width" class="row">
+      <div id="full_width_c1" class="col-md-12" ></div>
+    </div>
+
+  </div>
+  <!-- .xbiod -->
+
+  <div class="push"></div>
+
+</div>
+<!-- .wrapper -->

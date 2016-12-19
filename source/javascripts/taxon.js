@@ -1,7 +1,6 @@
 // Call the loader for the current page
 $(document).ready(loader);
-//$(document).on('ready page:load', loader);
-var TEST = 1;
+var TEST = true;
 
 function loader() {
 	// Initialize xBio:D library
@@ -36,12 +35,6 @@ function loader() {
 			// Load types
 			taxon.showTypes('full_width_c1', tnuid, {basic_only: 'N', primary_only: 'N', inst_id: inst_id, limit: '50', widget_options: {initial_height: '500px'}});
 
-			$('.xbiodWidgetHeader').tooltip();
-			$('.xbiodWidgetPagination').tooltip();
-			$('.xbiodWidgetMenuButton').mouseenter(function(e){
-				$('.xbiodWidgetHeader').tooltip('hide');
-			});
-
 		} else {
 			var tnuid = xbiod.base.getQueryVariable('id');
 
@@ -61,7 +54,7 @@ function loader() {
 
 			// Setting default widget options
 			xbiod.base.widget_options.initial_height = '1000px';
-			xbiod.base.widget_options.header = '<img class="xbiodWidgetIcon" src="img/xbiod.png"/>';
+			xbiod.base.widget_options.header = '<img class="xbiodWidgetIcon" src="images/xbiod.png"/>';
 			xbiod.base.widget_options.start = 'closed';
 
 			// Load search
@@ -113,14 +106,6 @@ function loader() {
 
 			// Load subordinate taxa
 			taxon.showSubordinateTaxa('half_width_c2', tnuid);
-
-			$('.xbiodWidgetHeader').tooltip({
-				track: true
-			});
-
-			$('.xbiodWidgetMenuButton').mouseenter(function(e){
-				$('.xbiodWidgetHeader').tooltip('hide');
-			});
 		}
 
 	});

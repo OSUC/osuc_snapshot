@@ -1,0 +1,25 @@
+<footer class="footer">
+  <div class="container">
+  <small>
+    © Copyright 2011-<%= get_current_year %>, <%= link_to 'The Ohio State University', 'http://www.osu.edu/', :relative => false %>
+  </small>
+  <nav>
+    <ul>
+      <li>
+        <%= link_to 'About', 'http://triplehorn-s.asc.ohio-state.edu/about', :relative => false %>
+      </li>
+      <li>
+        <%= link_to 'Contact', 'http://triplehorn-s.asc.ohio-state.edu/contact', :relative => false %>
+      </li>
+      <li>
+        <%= link_to 'News', 'http://u.osu.edu/pinningblock/', :relative => false %>
+      </li>
+    </ul>
+  </nav>
+  </div>
+  <!-- .container -->
+  Powered by 
+  <%= tag :img, :src => "images/xbiod.png" %>
+  <%#<img src="/img/xbiod.png">%>
+</footer>
+<!-- .footer -->
